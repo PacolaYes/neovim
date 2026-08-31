@@ -86,3 +86,10 @@ vim.keymap.set("n", "<C-S-Right>", "<cmd>vsplit<cr>")
 vim.keymap.set("n", "<M-q>", "<cmd>qa<cr>")
 vim.keymap.set("n", "<M-w>", "<cmd>close<cr>")
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+
+-- surround visual stuff :P
+-- copied from https://safereddit.com/r/neovim/comments/18x6xk9/introducing_visualsurroundnvim/kg44mdp/?context=3#kg44mdp
+local v_chars = {"(", ")", "[", "]", "{", "}", "'", "\""}
+for _, char in pairs(v_chars) do
+    vim.keymap.set("v", char, "<Plug>(nvim-surround-visual)"..char)
+end
