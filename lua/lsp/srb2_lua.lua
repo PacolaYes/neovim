@@ -1,18 +1,32 @@
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+local root_markers = {
+  ".luarc.json",
+  ".luarc.jsonc",
+  ".luacheckrc",
+  ".stylua.toml",
+  ".git",
+  ".srb2project"
+}
 
 vim.lsp.config('srb2lua_ls', {
   cmd = { 'srb2lua-ls' },
 
   filetypes = { 'lua' },
 
-  -- Sets the "workspace" to the directory where any of these files is found.
-  root_markers = {
-    ".luarc.json",
-    ".luarc.jsonc",
-    ".luacheckrc",
-    ".stylua.toml",
-    ".git",
-  },
+  root_dir = function(_, on_dir)
+    if not vim.fs.find(".srb2project", {upward = true})[1] then return end
+
+    for _, marker in ipairs(root_markers) do
+      local path = vim.fs.find(marker, {upward = true})[1]
+
+      if path then
+        on_dir(vim.fs.dirname(path))
+  return
+      end
+    end
+
+    on_dir(vim.fn.getcwd())
+  end,
 
   settings = {
     Lua = {
@@ -35,7 +49,5 @@ vim.lsp.config('srb2lua_ls', {
         preloadFileSize = 5000,
       }
     }
-  },
-
-  capabilities = capabilities
+  }
 })

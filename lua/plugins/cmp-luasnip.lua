@@ -7,7 +7,7 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets",
       config = function()
-	require("luasnip.loaders.from_vscode").lazy_load()
+  require("luasnip.loaders.from_vscode").lazy_load()
       end
     },
     version = "v2.*",
@@ -34,31 +34,31 @@ return {
       local cmp = require("cmp")
 
       return {
-	snippet = {
-	  expand = function(args)
-	    require("luasnip").lsp_expand(args.body)
-	  end,
-	},
+  snippet = {
+    expand = function(args)
+      require("luasnip").lsp_expand(args.body)
+    end,
+  },
 
-	mapping = cmp.mapping.preset.insert({
-	  ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-	  ["<C-f>"] = cmp.mapping.scroll_docs(4),
-	  ["<C-Space>"] = cmp.mapping.complete(),
-	  ["<C-e>"] = cmp.mapping.abort(),
-	  ["<CR>"] = cmp.mapping.confirm({ select = true })
-	}),
+  mapping = cmp.mapping.preset.insert({
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm({ select = true })
+  }),
 
-	sources = cmp.config.sources({
-	  { name = "nvim_lsp" },
-	  { name = "nvim_lua" },
-	  { name = "luasnip" }
-	}, {
-	  { name = "buffer" },
-	  { name = "async_path" }
-	}, {
-	  { name = "css-variables" },
-	  { name = "color_names" }
-	})
+  sources = cmp.config.sources({
+    { name = "nvim_lsp" },
+    { name = "nvim_lua" },
+    { name = "luasnip" }
+  }, {
+    { name = "buffer" },
+    { name = "async_path" }
+  }, {
+    { name = "css-variables" },
+    { name = "color_names" }
+  })
       }
     end,
 
